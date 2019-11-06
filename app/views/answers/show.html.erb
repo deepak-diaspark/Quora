@@ -1,0 +1,15 @@
+    <table style='padding-left:60px;'>
+        <thead>
+        <tr>
+            <th>Question:</th>
+        </tr>
+        </thead>
+    <tbody>
+    <% @questions.each do |question| %>
+        <tr>
+        <td><%= question.question %></td>
+        </tr>
+    <% end %>
+    </tbody>
+    </table>
+</div>

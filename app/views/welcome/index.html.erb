@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quora1</title> 
+
+  <style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #AA2200;
+}
+
+.topnav a {
+  float: left;
+  color: #e3f2fd;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: blue;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.dee{
+float: right;
+}
+  </style>
+</head>
+
+<body>
+
+ <div class="topnav">
+ <p class="navbar-text float-right"> 
+
+  <% if user_signed_in? %>
+  <p class="dee">Logged in as <strong><%= current_user.email %></strong></p>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+ 
+  <%= link_to 'Home', root_path, :class => 'navbar-link' %> 
+  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> 
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+  <%= link_to "AskQuestion", questions_path, :class => 'navbar-link'  %>
+  <%= link_to "View Question", new_question_path, :class => 'navbar-link'  %>
+  <%= link_to "Answer Question", questions_answer_path, :class => 'navbar-link'%>  
+
+    <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search Question" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>  
+
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> 
+    <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+<% end %>
+</p>
+</div>
+
+<div style="padding-left:16px"></div>
+<%= yield %>
+</body>
+</html>

@@ -1,0 +1,17 @@
+
+<%= form_with scope: :question, url: questions_path, local: true do |form| %>
+  <p>
+    <%= form.label :enter_your_question %><br>
+    <%= form.text_area :question, :required => 'required' %>
+  </p>
+  
+  <p>
+    <%= form.label :email_id %><br>   
+    <%= form.text_field :email_id, value: current_user.email,  readonly: true, :required => 'required' %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+

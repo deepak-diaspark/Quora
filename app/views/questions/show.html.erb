@@ -1,0 +1,40 @@
+
+
+<p>
+  <strong>Question is :</strong> <br>
+  <%= @question.question %>
+</p>
+
+ 
+<h2>Write Your Answer:</h2>
+<%= form_with(model: [ @question, @question.comments.build ], local: true) do |form| %>
+
+ <p>
+    <%= form.label :Answer %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+  
+  <p>
+    <%= form.label :Answer_by %><br>
+    <%= form.text_field :commenter %>
+  </p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<h2>Answers</h2>
+<% @question.comments.each do |comment| %>
+  <p>
+    <strong>Answered By:</strong>
+    <%= comment.commenter %>
+  </p>
+ 
+  <p>
+    <strong>Answer:</strong>
+    <%= comment.body %>
+  </p>
+<% end %>
+ 
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', question_path %>
