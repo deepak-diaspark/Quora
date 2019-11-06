@@ -1,40 +1,68 @@
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
 <p>
   <strong>Question is :</strong> <br>
   <%= @question.question %>
 </p>
 
- 
 <h2>Write Your Answer:</h2>
 <%= form_with(model: [ @question, @question.comments.build ], local: true) do |form| %>
 
  <p>
     <%= form.label :Answer %><br>
-    <%= form.text_area :body %>
+    <%= form.text_area :body ,:required => 'required' , style: "width:800px;"%>
   </p>
   <p>
   
   <p>
     <%= form.label :Answer_by %><br>
-    <%= form.text_field :commenter %>
+    <%= form.text_field :commenter , :required => 'required', style: "width:800px;"%>
   </p>
     <%= form.submit %>
   </p>
 <% end %>
 
-<h2>Answers</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Answer by</th>
+      <th scope="col">Answer</th>
+    </tr>
+  </thead>
+ 
+ <tbody>
 <% @question.comments.each do |comment| %>
   <p>
-    <strong>Answered By:</strong>
-    <%= comment.commenter %>
+  <tr>
+    <th scope="row">*</th>
+    <td><%= comment.commenter %></td>
   </p>
  
   <p>
-    <strong>Answer:</strong>
-    <%= comment.body %>
+    <td><%= comment.body %></td>
   </p>
+
+  <p>
+  <td><%= link_to 'Delete Answer', [comment.question, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+  </td>
+</p>  
+ 
+
+ 
+
 <% end %>
  
 <%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', question_path %>
+<%= link_to 'Back', questions_answer_path %>
